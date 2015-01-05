@@ -56,6 +56,14 @@ class GenericOAuth2ResourceOwner extends AbstractResourceOwner
             }
 
             $this->storage->save($this, $this->state, 'csrf_state');
+            $session = $_SESSION['_sf2_attributes'];
+            $adminNeedLogin = (isset($session['admin_login']) AND (int)$session['admin_login'] == 1)
+                ? 1
+                : 0;
+
+            if($adminNeedLogin == 1) {
+                $this->options['scope'] = $this->options['scope_seller'];
+            }
         }
 
         $parameters = array_merge(array(

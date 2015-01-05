@@ -209,6 +209,14 @@ class Configuration implements ConfigurationInterface
                                     ->thenUnset()
                                 ->end()
                             ->end()
+                            ->scalarNode('scope_seller')
+                                ->validate()
+                                    ->ifTrue(function($v) {
+                                        return empty($v);
+                                    })
+                                    ->thenUnset()
+                                ->end()
+                            ->end()
                             ->scalarNode('user_response_class')
                                 ->validate()
                                     ->ifTrue(function($v) {
